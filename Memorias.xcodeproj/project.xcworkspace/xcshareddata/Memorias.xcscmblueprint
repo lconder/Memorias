@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "0B6378757FD84A3DCE46E56D3D7A1C0851C205F3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "361AB9E3BD1CE5D04C5E95785DE110B4D04816BE" : 9223372036854775807,
+    "0B6378757FD84A3DCE46E56D3D7A1C0851C205F3" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FED1F68F-21C0-4413-8690-A28AD9F38416",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "361AB9E3BD1CE5D04C5E95785DE110B4D04816BE" : "",
+    "0B6378757FD84A3DCE46E56D3D7A1C0851C205F3" : "Memorias\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Memorias",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Memorias.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/lconder\/Memorias.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0B6378757FD84A3DCE46E56D3D7A1C0851C205F3"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/lconder\/Omnilife_iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "361AB9E3BD1CE5D04C5E95785DE110B4D04816BE"
+    }
+  ]
+}

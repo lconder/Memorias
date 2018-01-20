@@ -63,7 +63,7 @@
         <scene sceneID="b7L-nC-8Sh">
             <objects>
                 <collectionViewController id="guD-0o-ieh" customClass="MemoriesCollectionViewController" customModule="Memorias" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="VXC-wd-vo2">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="VXC-wd-vo2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.88593207465277779" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -74,7 +74,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="xtl-Sf-sFi">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="xtl-Sf-sFi" customClass="MemoryCell" customModule="Memorias" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="160" height="160"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -93,6 +93,9 @@
                                     <constraint firstAttribute="trailing" secondItem="2jw-nd-z8D" secondAttribute="trailing" id="mjW-Sc-GVK"/>
                                 </constraints>
                                 <size key="customSize" width="160" height="160"/>
+                                <connections>
+                                    <outlet property="imageView" destination="2jw-nd-z8D" id="ugb-03-O4D"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="7lX-Ba-MYa">
@@ -115,7 +118,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n1m-Ig-Utw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="900" y="800"/>
+            <point key="canvasLocation" x="878" y="806"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0pW-K7-tz1">

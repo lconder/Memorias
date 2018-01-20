@@ -11,7 +11,7 @@ import AVFoundation
 import Photos
 import Speech
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "cell"
 
 class MemoriesCollectionViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -26,7 +26,7 @@ class MemoriesCollectionViewController: UICollectionViewController, UIImagePicke
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addImagePressed))
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        //self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
 
     }
     
@@ -203,36 +203,63 @@ class MemoriesCollectionViewController: UICollectionViewController, UIImagePicke
     }
     
     
+    func imageURL(for memory: URL) -> URL {
+    
+        return  memory.appendingPathExtension("jpg")
+        
+    }
+    
+    func thumbnailURL(for memory: URL) -> URL {
+        
+        return  memory.appendingPathExtension("thumb")
+        
+    }
+    
+    func audioURL(for memory: URL) -> URL {
+        
+        return  memory.appendingPathExtension("m4a")
+        
+    }
+    
+    func transcriptionURL(for memory: URL) -> URL {
+        
+        return  memory.appendingPathExtension("txt")
+        
+    }
+    
+    
 
    
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 2
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
+        
+        if section==0 {
+            return 0
+        }else{
+            return self.memories.count
+        }
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
+        
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MemoryCell
+        
+        let memory = self.memories[indexPath.row]
+        
+        let memoryName = self.thumbnailURL(for: memory).path
+        
+        let image = UIImage(contentsOfFile: memoryName)
+        
+        cell.imageView.image = image
     
         return cell
     }

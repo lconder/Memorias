@@ -13,6 +13,7 @@
 		89CD7FB02010E2F20095897F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 89CD7FAF2010E2F20095897F /* Assets.xcassets */; };
 		89CD7FB32010E2F20095897F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89CD7FB12010E2F20095897F /* LaunchScreen.storyboard */; };
 		89CD7FBB2010F22E0095897F /* MemoriesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CD7FBA2010F22E0095897F /* MemoriesCollectionViewController.swift */; };
+		89DBB45C20138858001F60E9 /* MemoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89DBB45B20138858001F60E9 /* MemoryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		89CD7FB22010E2F20095897F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89CD7FB42010E2F20095897F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		89CD7FBA2010F22E0095897F /* MemoriesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoriesCollectionViewController.swift; sourceTree = "<group>"; };
+		89DBB45B20138858001F60E9 /* MemoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				89CD7FAA2010E2F20095897F /* ViewController.swift */,
 				89CD7FAC2010E2F20095897F /* Main.storyboard */,
 				89CD7FBA2010F22E0095897F /* MemoriesCollectionViewController.swift */,
+				89DBB45B20138858001F60E9 /* MemoryCell.swift */,
 				89CD7FAF2010E2F20095897F /* Assets.xcassets */,
 				89CD7FB12010E2F20095897F /* LaunchScreen.storyboard */,
 				89CD7FB42010E2F20095897F /* Info.plist */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89DBB45C20138858001F60E9 /* MemoryCell.swift in Sources */,
 				89CD7FAB2010E2F20095897F /* ViewController.swift in Sources */,
 				89CD7FA92010E2F20095897F /* AppDelegate.swift in Sources */,
 				89CD7FBB2010F22E0095897F /* MemoriesCollectionViewController.swift in Sources */,
@@ -308,6 +312,7 @@
 				89CD7FB92010E2F20095897F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

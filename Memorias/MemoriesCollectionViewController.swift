@@ -11,11 +11,15 @@ import AVFoundation
 import Photos
 import Speech
 
+import CoreSpotlight
+import MobileCoreServices
+
 private let reuseIdentifier = "cell"
 
-class MemoriesCollectionViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVAudioRecorderDelegate {
+class MemoriesCollectionViewController: UICollectionViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, AVAudioRecorderDelegate, UISearchBarDelegate {
     
     var memories: [URL] = []
+    var filteredMemories: [URL] = []
     
     var currentMemory: URL!
     
@@ -23,6 +27,8 @@ class MemoriesCollectionViewController: UICollectionViewController, UIImagePicke
     var audioRecorder: AVAudioRecorder?
     
     var recordingURL: URL!
+    
+    var searchQuery: CSSearchQuery?
     
     
     override func viewDidLoad() {
@@ -119,7 +125,7 @@ class MemoriesCollectionViewController: UICollectionViewController, UIImagePicke
             
             
         }
-        
+        filteredMemories = memories
         collectionView?.reloadSections(IndexSet(integer:1))
     
     }
@@ -250,6 +256,96 @@ class MemoriesCollectionViewController: UICollectionViewController, UIImagePicke
     }
     
     
+    //MARK: - UISearchBar
+    
+    
+    func filterMemories(text: String){
+        
+        guard text.characters.count>0 else {
+            self.filteredMemories = self.memories
+            collectionView?.reloadSections(IndexSet(integer:1))
+            return
+        }
+        
+        var allItems: [CSSearchableItem] = []
+        
+        searchQuery?.cancel()
+        
+        let queryString = "contentDescription == \"*\(text)*\"c"
+        
+        self.searchQuery = CSSearchQuery(queryString: queryString, attributes: nil)
+        
+        self.searchQuery?.foundItemsHandler = { items in
+            
+            allItems.append(contentsOf: items)
+            
+        }
+        
+        self.searchQuery?.completionHandler = { error in
+            
+            DispatchQueue.main.async { [unowned self] in
+                
+                self.activateFilters(matches: allItems)
+                
+            }
+            
+        }
+        
+        self.searchQuery?.start()
+        
+    }
+    
+    
+    func activateFilters(matches: [CSSearchableItem]){
+        
+        self.filteredMemories = matches.map({ item in
+            
+            let uniqueID = item.uniqueIdentifier
+            let url = URL(fileURLWithPath: uniqueID)
+            return url
+        })
+        
+        collectionView?.reloadSections(IndexSet(integer: 1))
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        self.filterMemories(text: searchText)
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.resignFirstResponder()
+        
+    }
+    
+    
+    func indexMemory(memory: URL, text: String){
+    
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeText as String)
+        
+        attributeSet.title = "Recuerdo de Memorias"
+        attributeSet.contentDescription = text
+        attributeSet.thumbnailURL = thumbnailURL(for: memory)
+        
+        let item = CSSearchableItem(uniqueIdentifier: memory.path, domainIdentifier: "com.lcondeer", attributeSet: attributeSet)
+        
+        
+        item.expirationDate = Date.distantFuture
+        
+        CSSearchableIndex.default().indexSearchableItems([item]) { (error) in
+            
+            if let error=error {
+                print("Ha habido un error \(error)")
+            }else{
+                print("Hemos podido indexar el texto \(text)")
+            }
+            
+        }
+    
+    }
 
    
 
@@ -266,7 +362,8 @@ class MemoriesCollectionViewController: UICollectionViewController, UIImagePicke
         if section==0 {
             return 0
         }else{
-            return self.memories.count
+            //return self.memories.count
+            return self.filteredMemories.count
         }
     }
 
@@ -275,7 +372,8 @@ class MemoriesCollectionViewController: UICollectionViewController, UIImagePicke
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MemoryCell
         
-        let memory = self.memories[indexPath.row]
+        //let memory = self.memories[indexPath.row]
+        let memory = self.filteredMemories[indexPath.row]
         
         let memoryName = self.thumbnailURL(for: memory).path
         
@@ -306,7 +404,8 @@ class MemoriesCollectionViewController: UICollectionViewController, UIImagePicke
             
             if let index = collectionView?.indexPath(for: cell){
             
-                self.currentMemory = self.memories[index.row]
+                //self.currentMemory = self.memories[index.row]
+                self.currentMemory = self.filteredMemories[index.row]
                 
                 self.startRecordingMemory()
                 
@@ -415,6 +514,7 @@ class MemoriesCollectionViewController: UICollectionViewController, UIImagePicke
                 do {
                     
                     try text.write(to: transcription, atomically: true, encoding: String.Encoding.utf8)
+                    self.indexMemory(memory: memory, text: text)
                     
                 }catch{
                     print("Ha habido un error")
@@ -449,7 +549,8 @@ class MemoriesCollectionViewController: UICollectionViewController, UIImagePicke
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let memory = self.memories[indexPath.row]
+        //let memory = self.memories[indexPath.row]
+        let memory = self.filteredMemories[indexPath.row]
         
         let fileManager = FileManager.default
         
